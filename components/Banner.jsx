@@ -4,14 +4,14 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 export default function Banner() {
+  const fullText = "WELCOME TO ARSLAN EDIT'Z";
+  
   const [mounted, setMounted] = useState(false);
   const [displayText, setDisplayText] = useState(fullText);
   const [currentIndex, setCurrentIndex] = useState(fullText.length);
   const [isTypingComplete, setIsTypingComplete] = useState(true);
   const [showCursor, setShowCursor] = useState(false);
   const [shouldAnimateTyping, setShouldAnimateTyping] = useState(false);
-  
-  const fullText = "WELCOME TO ARSLAN EDIT'Z";
 
   // Ensure component is mounted on client
   useEffect(() => {
