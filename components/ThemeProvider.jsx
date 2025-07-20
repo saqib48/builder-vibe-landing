@@ -22,10 +22,6 @@ export function ThemeProvider({ children }) {
     document.documentElement.setAttribute('data-theme', newTheme);
   };
 
-  if (!mounted) {
-    return <div>{children}</div>;
-  }
-
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
       {children}
@@ -40,3 +36,5 @@ export const useTheme = () => {
   }
   return context;
 };
+
+export { useTheme }
