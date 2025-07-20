@@ -5,21 +5,28 @@ import { useEffect, useState } from 'react';
 
 export default function Banner() {
   const [mounted, setMounted] = useState(false);
-  const [displayText, setDisplayText] = useState('');
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isTypingComplete, setIsTypingComplete] = useState(false);
-  const [showCursor, setShowCursor] = useState(true);
+  const [displayText, setDisplayText] = useState(fullText);
+  const [currentIndex, setCurrentIndex] = useState(fullText.length);
+  const [isTypingComplete, setIsTypingComplete] = useState(true);
+  const [showCursor, setShowCursor] = useState(false);
+  const [shouldAnimateTyping, setShouldAnimateTyping] = useState(false);
   
   const fullText = "WELCOME TO ARSLAN EDIT'Z";
 
   // Ensure component is mounted on client
   useEffect(() => {
     setMounted(true);
+    // Start the typewriter animation after hydration
+    setShouldAnimateTyping(true);
+    setDisplayText('');
+    setCurrentIndex(0);
+    setIsTypingComplete(false);
+    setShowCursor(true);
   }, []);
 
   // Typewriter effect
   useEffect(() => {
-    if (!mounted) return;
+    if (!mounted || !shouldAnimateTyping) return;
     
     if (currentIndex < fullText.length) {
       const timeout = setTimeout(() => {
@@ -33,7 +40,7 @@ export default function Banner() {
         setIsTypingComplete(true);
       }, 500);
     }
-  }, [currentIndex, fullText, mounted]);
+  }, [currentIndex, fullText, mounted, shouldAnimateTyping]);
 
   // Blinking cursor effect
   useEffect(() => {
