@@ -1,46 +1,53 @@
-import { Inter, Fira_Code } from "next/font/google";
+import { Inter, Space_Grotesk, Poppins } from "next/font/google";
 import "./globals.css";
 
-// ✅ Use real fonts from Google
+// Modern fonts for video editing portfolio
 const inter = Inter({
   variable: "--font-geist-sans",
   subsets: ["latin"],
   display: "swap",
 });
 
-const firaCode = Fira_Code({
-  variable: "--font-geist-mono",
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const poppins = Poppins({
+  variable: "--font-poppins",
+  weight: ["300", "400", "500", "600", "700"],
   subsets: ["latin"],
   display: "swap",
 });
 
 export const metadata = {
-  title: "Arslan Edit'z - Professional Video Editing Services",
-  description: "Professional video editing services by Arslan Khizar. Transform your raw footage into cinematic masterpieces with our expert editing, motion graphics, and post-production services.",
-  keywords: "video editing, cinematic editing, motion graphics, post-production, video effects, professional editing, Arslan Edit'z",
-  authors: [{ name: "Arslan Khizar" }],
-  creator: "Arslan Khizar",
-  publisher: "Arslan Edit'z",
+  title: "Alex Chen - Video Editor & Motion Designer",
+  description: "Professional video editing and motion design services. Specializing in YouTube content, social media reels, commercials, and cinematic storytelling.",
+  keywords: "video editing, motion graphics, YouTube editing, social media content, cinematic editing, freelance video editor",
+  authors: [{ name: "Alex Chen" }],
+  creator: "Alex Chen",
+  publisher: "Alex Chen Portfolio",
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://arslan-editz.com"),
+  metadataBase: new URL("https://alexchen-video.com"),
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "Arslan Edit'z - Professional Video Editing Services",
-    description: "Transform your raw footage into cinematic masterpieces with our expert video editing services.",
-    url: "https://arslan-editz.com",
-    siteName: "Arslan Edit'z",
+    title: "Alex Chen - Video Editor & Motion Designer",
+    description: "Professional video editing and motion design services for creators and brands.",
+    url: "https://alexchen-video.com",
+    siteName: "Alex Chen Portfolio",
     images: [
       {
         url: "/images/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Arslan Edit'z - Professional Video Editing",
+        alt: "Alex Chen - Video Editor Portfolio",
       },
     ],
     locale: "en_US",
@@ -48,8 +55,8 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Arslan Edit'z - Professional Video Editing Services",
-    description: "Transform your raw footage into cinematic masterpieces with our expert video editing services.",
+    title: "Alex Chen - Video Editor & Motion Designer",
+    description: "Professional video editing and motion design services for creators and brands.",
     images: ["/images/og-image.jpg"],
   },
   robots: {
@@ -70,12 +77,12 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${inter.variable} ${firaCode.variable}`}>
+    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable} ${poppins.variable}`}>
       <head>
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/manifest.json" />
-        <meta name="theme-color" content="#e0c840" />
+        <meta name="theme-color" content="#8A2BE2" />
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=5"

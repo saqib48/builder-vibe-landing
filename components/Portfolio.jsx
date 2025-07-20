@@ -1,211 +1,326 @@
-"use client";
-import { useState } from "react";
+'use client';
+
+import { motion } from 'framer-motion';
+import { Play, ExternalLink, Calendar, Eye } from 'lucide-react';
+import { useState } from 'react';
 import Image from 'next/image';
-import { Play, X, Calendar, Clock } from "lucide-react";
 
 export default function Portfolio() {
-  const [showAll, setShowAll] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedVideo, setSelectedVideo] = useState(null);
-  const [isClosing, setIsClosing] = useState(false);
 
-  const videos = [
+  const categories = [
+    { id: 'all', name: 'All Projects' },
+    { id: 'youtube', name: 'YouTube' },
+    { id: 'social', name: 'Social Media' },
+    { id: 'commercial', name: 'Commercials' },
+    { id: 'cinematic', name: 'Cinematic' },
+  ];
+
+  const projects = [
     {
       id: 1,
-      title: "Cinematic Edit",
-      category: "Cinematic",
-      duration: "2:30",
-      thumbnail: "/images/L-4.jpg",
-      videoUrl: "/videos/video1.mp4"
+      title: 'Tech Review Channel Intro',
+      category: 'youtube',
+      thumbnail: '/images/L-4.jpg',
+      duration: '0:15',
+      views: '2.3M',
+      date: '2024',
+      description: 'Dynamic intro sequence for a popular tech review channel featuring kinetic typography and smooth transitions.',
+      tags: ['Motion Graphics', 'Typography', 'Branding'],
     },
     {
       id: 2,
-      title: "Action Sequence",
-      category: "Action",
-      duration: "1:45",
-      thumbnail: "/images/L-6.jpg",
-      videoUrl: "/videos/video2.mp4"
+      title: 'Fashion Brand Commercial',
+      category: 'commercial',
+      thumbnail: '/images/L-6.jpg',
+      duration: '1:30',
+      views: '850K',
+      date: '2024',
+      description: 'Cinematic commercial for a luxury fashion brand with color grading and dynamic cuts.',
+      tags: ['Color Grading', 'Commercial', 'Fashion'],
     },
     {
       id: 3,
-      title: "Dramatic Scene",
-      category: "Drama",
-      duration: "3:15",
-      thumbnail: "/images/L-9.jpg",
-      videoUrl: "/videos/video3.mp4"
+      title: 'Instagram Reel Series',
+      category: 'social',
+      thumbnail: '/images/L-9.jpg',
+      duration: '0:30',
+      views: '5.1M',
+      date: '2024',
+      description: 'Viral Instagram reel series with trending transitions and effects.',
+      tags: ['Social Media', 'Viral Content', 'Transitions'],
     },
     {
       id: 4,
-      title: "Comedy Skit",
-      category: "Comedy",
-      duration: "2:00",
-      thumbnail: "/images/F1-1.png",
-      videoUrl: "/videos/video4.mp4"
+      title: 'Documentary Short Film',
+      category: 'cinematic',
+      thumbnail: '/images/F1-1.png',
+      duration: '12:45',
+      views: '420K',
+      date: '2023',
+      description: 'Award-winning documentary short with emotional storytelling and professional color grading.',
+      tags: ['Documentary', 'Storytelling', 'Award Winner'],
     },
     {
       id: 5,
-      title: "Music Video",
-      category: "Music",
-      duration: "4:20",
-      thumbnail: "/images/F2-1.jpg",
-      videoUrl: "/videos/video5.mp4"
+      title: 'Product Launch Video',
+      category: 'commercial',
+      thumbnail: '/images/F2-1.jpg',
+      duration: '2:15',
+      views: '1.2M',
+      date: '2024',
+      description: 'High-energy product launch video with 3D elements and motion graphics.',
+      tags: ['Product Launch', '3D Graphics', 'Marketing'],
     },
     {
       id: 6,
-      title: "Documentary",
-      category: "Documentary",
-      duration: "5:30",
-      thumbnail: "/images/bg-overlay.jpg",
-      videoUrl: "/videos/video6.mp4"
-    }
+      title: 'Travel Vlog Highlights',
+      category: 'youtube',
+      thumbnail: '/images/bg-overlay.jpg',
+      duration: '8:30',
+      views: '3.7M',
+      date: '2024',
+      description: 'Cinematic travel highlights with drone footage and seamless transitions.',
+      tags: ['Travel', 'Drone Footage', 'Cinematic'],
+    },
   ];
 
-  const displayedVideos = showAll ? videos : videos.slice(0, 3);
+  const filteredProjects = selectedCategory === 'all' 
+    ? projects 
+    : projects.filter(project => project.category === selectedCategory);
 
-  const openModal = (video) => {
-    setSelectedVideo(video);
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
   };
 
-  const closeModal = () => {
-    setSelectedVideo(null);
-  };
-
-  const handleBackdropClick = (e) => {
-    if (e.target === e.currentTarget) {
-      closeModal();
-    }
-  };
-
-  const handleKeyDown = (e) => {
-    if (e.key === 'Escape') {
-      closeModal();
-    }
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+      },
+    },
   };
 
   return (
-    <section className="section-padding animated-bg">
-      {/* Background Elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/20 rounded-full blur-3xl animate-float"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-float delay-1000"></div>
-        <div className="absolute top-1/2 left-1/2 w-72 h-72 bg-primary/15 rounded-full blur-3xl animate-float delay-500"></div>
-      </div>
-
-      <div className="relative z-10 max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="section-title">OUR PORTFOLIO</h2>
-          <p className="section-subtitle">
-            Explore our latest creative work and see how we transform ordinary footage into extraordinary content
+    <section id="portfolio" className="section-padding bg-bg-accent">
+      <div className="container mx-auto px-6">
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl md:text-6xl font-heading font-bold gradient-text mb-6">
+            Featured Work
+          </h2>
+          <p className="text-xl text-text-secondary font-body max-w-3xl mx-auto">
+            A showcase of my latest video editing and motion design projects, 
+            from viral social media content to cinematic storytelling.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid-auto-fit mb-12">
-          {displayedVideos.map((video) => (
-            <div
-              key={video.id}
-              className="card group cursor-pointer"
-              onClick={() => openModal(video)}
+        {/* Category Filter */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="flex flex-wrap justify-center gap-4 mb-12"
+        >
+          {categories.map((category) => (
+            <button
+              key={category.id}
+              onClick={() => setSelectedCategory(category.id)}
+              className={`px-6 py-3 rounded-full font-accent font-medium transition-all duration-300 ${
+                selectedCategory === category.id
+                  ? 'bg-accent-primary text-white shadow-glow'
+                  : 'bg-bg-secondary text-text-secondary hover:bg-accent-primary hover:text-white border border-border-color'
+              }`}
+            >
+              {category.name}
+            </button>
+          ))}
+        </motion.div>
+
+        {/* Projects Grid */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
+          {filteredProjects.map((project) => (
+            <motion.div
+              key={project.id}
+              variants={itemVariants}
+              className="card group cursor-pointer overflow-hidden"
+              onClick={() => setSelectedVideo(project)}
             >
               {/* Thumbnail */}
-              <div className="relative aspect-video overflow-hidden rounded-t-2xl">
+              <div className="relative aspect-video overflow-hidden">
                 <Image
-                  src={video.thumbnail}
-                  alt={video.title}
+                  src={project.thumbnail}
+                  alt={project.title}
                   fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-500"
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-bg-primary/40 group-hover:bg-bg-primary/20 transition-colors duration-300" />
                 
-                {/* Play Button */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-16 h-16 bg-primary/90 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                    <svg className="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M8 5v14l11-7z" />
-                    </svg>
+                {/* Overlay */}
+                <div className="video-overlay">
+                  <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                    <Play size={24} className="text-white ml-1" />
                   </div>
                 </div>
 
                 {/* Duration Badge */}
-                <div className="badge badge-primary absolute top-4 right-4">
-                  {video.duration}
+                <div className="absolute top-4 right-4 bg-black/70 text-white px-2 py-1 rounded text-sm font-accent">
+                  {project.duration}
+                </div>
+
+                {/* Views Badge */}
+                <div className="absolute bottom-4 left-4 bg-black/70 text-white px-2 py-1 rounded text-sm font-accent flex items-center gap-1">
+                  <Eye size={14} />
+                  {project.views}
                 </div>
               </div>
 
               {/* Content */}
               <div className="p-6">
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-xl font-semibold text-text-primary group-hover:text-primary transition-colors duration-300">
-                    {video.title}
-                  </h3>
-                </div>
-                
-                <div className="flex items-center gap-3">
-                  <span className="badge badge-accent">
-                    {video.category}
+                  <span className="text-sm font-accent font-medium text-accent-primary bg-accent-primary/10 px-3 py-1 rounded-full">
+                    {categories.find(cat => cat.id === project.category)?.name}
+                  </span>
+                  <span className="text-sm text-text-muted flex items-center gap-1">
+                    <Calendar size={14} />
+                    {project.date}
                   </span>
                 </div>
-              </div>
-            </div>
-          ))}
-        </div>
+                
+                <h3 className="text-xl font-heading font-semibold text-text-primary mb-3 group-hover:text-accent-primary transition-colors duration-300">
+                  {project.title}
+                </h3>
+                
+                <p className="text-text-secondary font-body text-sm mb-4 line-clamp-2">
+                  {project.description}
+                </p>
 
-        {/* Show More/Less Button */}
-        <div className="text-center">
-          <button
-            onClick={() => setShowAll(!showAll)}
-            className="btn-primary"
-          >
-            {showAll ? 'View Less' : 'View More'}
+                {/* Tags */}
+                <div className="flex flex-wrap gap-2">
+                  {project.tags.map((tag, index) => (
+                    <span
+                      key={index}
+                      className="text-xs font-accent text-text-muted bg-bg-accent px-2 py-1 rounded"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* View More Button */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="text-center mt-12"
+        >
+          <button className="btn-secondary">
+            View All Projects
           </button>
-        </div>
+        </motion.div>
       </div>
 
       {/* Video Modal */}
       {selectedVideo && (
-        <div
-          className="modal-backdrop flex items-center justify-center p-4"
-          onClick={handleBackdropClick}
-          onKeyDown={handleKeyDown}
-          tabIndex={0}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm flex items-center justify-center p-4"
+          onClick={() => setSelectedVideo(null)}
         >
-          <div className="modal-content w-full max-w-6xl max-h-[90vh]">
-            {/* Close Button */}
-            <button
-              onClick={closeModal}
-              className="absolute top-4 right-4 z-10 w-12 h-12 bg-bg-secondary/70 text-white rounded-full flex items-center justify-center hover:bg-bg-secondary transition-colors duration-300"
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.8, opacity: 0 }}
+            className="bg-bg-secondary rounded-2xl overflow-hidden max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
             {/* Video Player */}
-            <div className="relative aspect-video">
-              <video
-                src={selectedVideo.videoUrl}
-                controls
-                autoPlay
-                className="w-full h-full object-contain bg-black"
-              >
-                Your browser does not support the video tag.
-              </video>
+            <div className="aspect-video bg-black relative">
+              <Image
+                src={selectedVideo.thumbnail}
+                alt={selectedVideo.title}
+                fill
+                className="object-cover"
+              />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                  <Play size={32} className="text-white ml-1" />
+                </div>
+              </div>
             </div>
 
             {/* Video Info */}
-            <div className="p-6 bg-gradient-to-r from-bg-secondary to-bg-accent">
-              <div className="flex items-center justify-between mb-3">
-                <h3 className="text-2xl font-semibold text-text-primary">
+            <div className="p-8">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-2xl font-heading font-bold text-text-primary">
                   {selectedVideo.title}
                 </h3>
-                <span className="badge badge-primary">
-                  {selectedVideo.duration}
-                </span>
+                <button
+                  onClick={() => setSelectedVideo(null)}
+                  className="p-2 rounded-full bg-bg-accent hover:bg-accent-primary hover:text-white transition-all duration-300"
+                >
+                  <ExternalLink size={20} />
+                </button>
               </div>
-              <span className="badge badge-accent">
-                {selectedVideo.category}
-              </span>
+              
+              <p className="text-text-secondary font-body mb-6">
+                {selectedVideo.description}
+              </p>
+
+              <div className="flex flex-wrap gap-4 text-sm text-text-muted">
+                <span className="flex items-center gap-1">
+                  <Calendar size={16} />
+                  {selectedVideo.date}
+                </span>
+                <span className="flex items-center gap-1">
+                  <Eye size={16} />
+                  {selectedVideo.views} views
+                </span>
+                <span>Duration: {selectedVideo.duration}</span>
+              </div>
+
+              <div className="flex flex-wrap gap-2 mt-6">
+                {selectedVideo.tags.map((tag, index) => (
+                  <span
+                    key={index}
+                    className="text-sm font-accent text-accent-primary bg-accent-primary/10 px-3 py-1 rounded-full"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       )}
     </section>
   );
