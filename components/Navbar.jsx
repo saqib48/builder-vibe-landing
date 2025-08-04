@@ -1,4 +1,5 @@
-'use client';
+"use client";
+
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -51,7 +52,7 @@ export default function Navbar() {
             transition={{ delay: 0.1 }}
             className="text-2xl font-heading font-bold gradient-text"
           >
-            Alex Chen
+            Arslan Khizar
           </motion.div>
 
           {/* Desktop Navigation */}

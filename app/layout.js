@@ -33,14 +33,14 @@ export const metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://alexchen-video.com"),
+  metadataBase: new URL("https://arslankhizer.vercel.app"),
   alternates: {
     canonical: "/",
   },
   openGraph: {
     title: "Alex Chen - Video Editor & Motion Designer",
     description: "Professional video editing and motion design services for creators and brands.",
-    url: "https://alexchen-video.com",
+    url: "https://arslankhizer.vercel.app/",
     siteName: "Alex Chen Portfolio",
     images: [
       {
@@ -55,7 +55,7 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Alex Chen - Video Editor & Motion Designer",
+    title: "ARSLAN KHIZER - Video Editor & Motion Designer",
     description: "Professional video editing and motion design services for creators and brands.",
     images: ["/images/og-image.jpg"],
   },

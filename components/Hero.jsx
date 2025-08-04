@@ -1,4 +1,5 @@
-'use client';
+"use client";
+
 
 import { motion } from 'framer-motion';
 import { Play, ArrowDown } from 'lucide-react';
@@ -22,7 +23,7 @@ export default function Hero() {
   };
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-5">
       {/* Background Video/Gradient */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-br from-accent-primary/20 via-bg-primary to-accent-secondary/20"></div>
@@ -135,21 +136,21 @@ export default function Hero() {
         </motion.div>
 
         {/* Scroll Indicator */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.2, duration: 0.8 }}
           className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-        >
-          <motion.button
+        > */}
+          {/* <motion.button
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             onClick={scrollToPortfolio}
             className="p-3 rounded-full bg-bg-secondary/50 backdrop-blur-sm border border-border-color hover:bg-accent-primary hover:text-white transition-all duration-300"
-          >
-            <ArrowDown size={24} />
-          </motion.button>
-        </motion.div>
+          > */}
+{/*             
+          </motion.button> */}
+        {/* </motion.div> */}
       </div>
     </section>
   );

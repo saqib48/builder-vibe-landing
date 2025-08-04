@@ -57,7 +57,7 @@ export default function Footer() {
                 transition={{ duration: 0.6 }}
               >
                 <h3 className="text-3xl font-heading font-bold gradient-text mb-4">
-                  Alex Chen
+                  Arslan Khizer
                 </h3>
                 <p className="text-text-secondary font-body mb-6 max-w-md">
                   Professional video editor and motion designer creating compelling content 
@@ -155,7 +155,7 @@ export default function Footer() {
           >
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
               <p className="text-text-muted font-body text-sm">
-                © {currentYear} Alex Chen. All rights reserved.
+                © {currentYear} Arslan Khizer. All rights reserved.
               </p>
               
               <div className="flex items-center gap-6">
