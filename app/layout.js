@@ -22,12 +22,12 @@ const poppins = Poppins({
 });
 
 export const metadata = {
-  title: "Alex Chen - Video Editor & Motion Designer",
+  title: "ARSLAN KHIZER - Video Editor & Motion Designer",
   description: "Professional video editing and motion design services. Specializing in YouTube content, social media reels, commercials, and cinematic storytelling.",
   keywords: "video editing, motion graphics, YouTube editing, social media content, cinematic editing, freelance video editor",
-  authors: [{ name: "Alex Chen" }],
-  creator: "Alex Chen",
-  publisher: "Alex Chen Portfolio",
+  authors: [{ name: "ARSLAN KHIZER" }],
+  creator: "ARSLAN KHIZER",
+  publisher: "ARSLAN KHIZER Portfolio",
   formatDetection: {
     email: false,
     address: false,
@@ -38,10 +38,10 @@ export const metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "Alex Chen - Video Editor & Motion Designer",
+    title: "ARSLAN KHIZER - Video Editor & Motion Designer",
     description: "Professional video editing and motion design services for creators and brands.",
     url: "https://arslankhizer.vercel.app/",
-    siteName: "Alex Chen Portfolio",
+    siteName: "ARSLAN KHIZER Portfolio",
     images: [
       {
         url: "/images/og-image.jpg",
